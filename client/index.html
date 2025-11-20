@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Energy Twin Prototype</title>
+  <style>
+    body { margin:0; font-family: system-ui, sans-serif; display:flex; height:100vh; }
+    #left { flex:1; position:relative; background:#ddd; }
+    #right { width:320px; background:#111; color:#eee; padding:12px; overflow:auto; }
+    canvas { width:100%; height:100%; display:block; }
+    .row { margin:8px 0; }
+    label { font-size:12px; opacity:0.8; display:block; }
+    input, select, button { width:100%; padding:6px; border-radius:6px; border:1px solid #333; background:#222; color:#eee; }
+    button { cursor:pointer; margin-top:4px; }
+    button.secondary { background:#333; }
+  </style>
+</head>
+<body>
+  <div id="left"><canvas id="c"></canvas></div>
+  <div id="right">
+    <h3>Energy Twin</h3>
+
+    <div class="row">
+      <label>Seed</label>
+      <input id="seed" type="number" value="7" />
+    </div>
+    <div class="row">
+      <label>Tags (geo)</label>
+      <input id="tags" value="river,dense" />
+    </div>
+    <div class="row">
+      <button id="gen">Generate village</button>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <button id="build">Build grid from geo</button>
+    </div>
+    <div class="row">
+      <label>Sim dt (sec)</label>
+      <input id="dt" type="number" step="0.1" value="1.0" />
+    </div>
+    <div class="row">
+      <button id="start">Start sim</button>
+      <button id="pause" class="secondary">Pause sim</button>
+      <button id="step" class="secondary">Step</button>
+    </div>
+    <div class="row">
+      <button id="triggerFault">Trigger fault</button>
+      <button id="clearFaults" class="secondary">Clear faults</button>
+    </div>
+
+    <hr/>
+
+    <h4>Selected</h4>
+    <div id="sel">None</div>
+    <div id="panel" style="margin-top:10px;"></div>
+
+    <hr/>
+    <h4>Tool</h4>
+    <select id="tool">
+      <option value="select">Select</option>
+      <option value="add_source">Add Source</option>
+      <option value="add_pole">Add Pole</option>
+      <option value="connect_line">Connect Line (click 2 nodes)</option>
+    </select>
+    <div id="hint" style="font-size:12px; opacity:0.7; margin-top:6px;"></div>
+  </div>
+
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
