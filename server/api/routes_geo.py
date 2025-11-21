@@ -3,14 +3,14 @@ from fastapi import APIRouter, HTTPException
 from typing import Dict, Any
 import random, uuid
 from persistence.inmem_store import STORE
-from contexts.geo_village.use_cases.generate_village import GenerateVillage, GenerateVillageParams
+from contexts.geo_village.use_cases.generate_village import AdvancedVillageGenerator, GenerateVillageParams
 
 router = APIRouter(prefix="/geo", tags=["geo"])
 
 @router.post("/generate")
 def generate_geo(seed:int=0,width:int=300,height:int=300,tags:str=""):
     tag_list=[t.strip() for t in tags.split(",") if t.strip()]
-    v=GenerateVillage(GenerateVillageParams(seed=seed,width=width,height=height,tags=tag_list)).execute()
+    v=AdvancedVillageGenerator(GenerateVillageParams(seed=seed,width=width,height=height,tags=tag_list)).execute()
     geo_id=f"geo_{uuid.uuid4().hex[:8]}"
     houses=[]
     for i,h in enumerate(v.houses):
